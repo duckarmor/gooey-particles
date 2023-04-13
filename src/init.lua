@@ -1,13 +1,12 @@
 local reconcileParticleProps = require(script.Utility.ParticleProps.reconcileParticleProps)
 local registerEmitter = require(script.GooeyEmitter.registerEmitter)
 local registerSingleEmitter = require(script.GooeyEmitter.registerSingleEmitter)
-local RoactElement = require(script.RoactElement)
 local Types = require(script.Utility.Types)
 
-type GooeyParticleProps = Types.GooeyParticleProps
-type GooeyEmitter = Types.GooeyEmitter
+export type GooeyParticleProps = Types.GooeyParticleProps
+export type GooeyEmitter = Types.GooeyEmitter
 
-local GooeyParticles = {RoactElement = RoactElement}
+local GooeyParticles = {}
 
 function GooeyParticles.Emit(container: GuiObject, pos: UDim2, props: GooeyParticleProps, emitAmount: number): ()
 	reconcileParticleProps(props)
