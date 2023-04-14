@@ -1,4 +1,4 @@
-local function evaluateNumberSequence(sequence, value)
+local function evaluateNumberSequence(sequence: NumberSequence, value: number)
 	assert(typeof(sequence) == "NumberSequence", "Must pass a valid NumberSequence.")
 	assert(typeof(value) == "number", "Must pass a valid number.")
 
@@ -21,6 +21,8 @@ local function evaluateNumberSequence(sequence, value)
 			return (next.Value - this.Value) * alpha + this.Value
 		end
 	end
+
+	return 0
 end
 
 return evaluateNumberSequence

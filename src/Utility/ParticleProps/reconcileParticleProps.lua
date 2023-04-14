@@ -6,7 +6,7 @@ type GooeyParticleProps = Types.GooeyParticleProps
 local function reconcileParticleProps(props: GooeyParticleProps): ()
 	props = table.clone(props)
 
-	for propertyName, defaultValue in pairs(defaultParticleProps) do
+	for propertyName, defaultValue in defaultParticleProps do
 		if props[propertyName] == nil then
 			props[propertyName] = defaultValue
 		end

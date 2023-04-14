@@ -17,9 +17,6 @@ local function removeEmitter(
 			until isEmpty(emitter.particles) == true
 
 			disconnectEmitter()
-			disconnectEmitter = nil
-
-			emitter = nil
 
 			if onComplete ~= nil then
 				onComplete()

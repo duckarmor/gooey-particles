@@ -1,6 +1,5 @@
 export type GooeyParticleProps = {
 	Acceleration: Vector2,
-	EmissionDirection: Enum.NormalId,
 	Color: Color3 | ColorSequence,
 	Image: string,
 	Lifetime: number | NumberRange,
@@ -15,8 +14,9 @@ export type GooeyParticleProps = {
 
 export type Emitter = {
 	container: GuiObject,
-	particles: { ImageLabel },
+	particles: { GooeyParticle },
 	props: GooeyParticleProps,
+	spawnNextParticleAt: nil,
 }
 
 export type GooeyParticleEmitter = Emitter & {

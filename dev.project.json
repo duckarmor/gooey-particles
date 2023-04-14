@@ -1,0 +1,22 @@
+{
+    "name": "GooeyParticles",
+    "tree": {
+        "$className": "DataModel",
+        "ReplicatedStorage": {
+            "$className": "ReplicatedStorage",
+            "Packages": {
+                "$className": "Folder",
+                "GooeyParticles": {
+                    "$path": "src"
+                }
+            }
+        },
+        "StarterPlayer": {
+            "$className": "StarterPlayer",
+            "StarterPlayerScripts": {
+                "$className": "StarterPlayerScripts",
+                "$path": "tests"
+            }
+        }
+    }
+}

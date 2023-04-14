@@ -1,4 +1,4 @@
-local function evaluateColorSequence(sequence, value)
+local function evaluateColorSequence(sequence: ColorSequence, value: number)
 	assert(typeof(sequence) == "ColorSequence", "Must pass a valid ColorSequence.")
 	assert(typeof(value) == "number", "Must pass a valid number.")
 
@@ -26,6 +26,8 @@ local function evaluateColorSequence(sequence, value)
 			)
 		end
 	end
+
+	return Color3.fromRGB(255, 255, 255)
 end
 
 return evaluateColorSequence
