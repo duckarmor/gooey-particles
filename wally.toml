@@ -1,7 +1,7 @@
 [package]
 name = "duckarmor/gooey-particles"
 description = "UI Particle System."
-version = "0.1.0"
+version = "0.1.0-beta"
 license = "MIT"
 authors = ["passhley", "benbrimeyer"]
 realm = "shared"
