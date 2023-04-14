@@ -8,15 +8,21 @@ export type GooeyEmitter = Types.GooeyEmitter
 
 local GooeyParticles = {}
 
-function GooeyParticles.Emit(container: GuiObject, pos: UDim2, props: GooeyParticleProps, emitAmount: number): ()
-	reconcileParticleProps(props)
-
+local function createFrame(container: GuiObject, pos: UDim2)
 	local frame = Instance.new("Frame")
 	frame.AnchorPoint = Vector2.new(0.5, 0.5)
 	frame.BackgroundTransparency = 1
 	frame.Position = pos
-	frame.Size = UDim2.fromOffset(0, 0)
+	frame.Size = UDim2.fromScale(1, 1)
 	frame.Parent = container
+
+	return frame
+end
+
+function GooeyParticles.Emit(container: GuiObject, pos: UDim2, props: GooeyParticleProps, emitAmount: number): ()
+	reconcileParticleProps(props)
+
+	local frame = createFrame(container, pos)
 
 	registerSingleEmitter(frame, props, emitAmount, function()
 		frame:Destroy()
@@ -27,12 +33,7 @@ end
 function GooeyParticles.CreateEmitter(container: GuiObject, pos: UDim2, props: GooeyParticleProps): GooeyEmitter
 	reconcileParticleProps(props)
 
-	local frame = Instance.new("Frame")
-	frame.AnchorPoint = Vector2.new(0.5, 0.5)
-	frame.BackgroundTransparency = 1
-	frame.Position = pos
-	frame.Size = UDim2.fromOffset(0, 0)
-	frame.Parent = container
+	local frame = createFrame(container, pos)
 
 	local gooeyEmitter = {
 		container = frame,

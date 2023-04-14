@@ -1,9 +1,8 @@
 local RunService = game:GetService("RunService")
 local HttpService = game:GetService("HttpService")
 
-local Llama = require(script.Parent.Parent.Parent.Llama)
+local isEmpty = require(script.Parent.isEmpty)
 
-local isEmpty = Llama.isEmpty
 local renderstepConnection = nil
 local renderstepCallbacks = {}
 

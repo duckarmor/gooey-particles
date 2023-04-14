@@ -7,7 +7,12 @@ local updateEmitter = require(script.Parent.updateEmitter)
 
 type GooeyParticleProps = Types.GooeyParticleProps
 
-local function registerSingleEmitter(container: GuiObject, props: GooeyParticleProps, emitAmount: number, onComplete: () -> () | nil): ()
+local function registerSingleEmitter(
+	container: GuiObject,
+	props: GooeyParticleProps,
+	emitAmount: number,
+	onComplete: () -> () | nil
+): ()
 	local emitter = createEmitter(container, props)
 	for _ = 1, emitAmount do
 		createParticle(emitter)
@@ -18,7 +23,9 @@ local function registerSingleEmitter(container: GuiObject, props: GooeyParticleP
 	end)
 
 	removeEmitter(emitter, disconnectEmitter)(function()
-		onComplete()
+		if onComplete then
+			onComplete()
+		end
 	end)
 end
 

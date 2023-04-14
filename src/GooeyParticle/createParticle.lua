@@ -17,12 +17,12 @@ local function getParticleLifetime(lifetime: number | NumberRange): number
 	return RNG:NextNumber(lifetime.Min, lifetime.Max)
 end
 
-local function getParticleVelocity(spread: NumberRange, speed: number): UDim2
+local function getParticleVelocity(direction: Vector2, spread: NumberRange, speed: number): Vector2
 	local angle = RNG:NextNumber(spread.Min, spread.Max)
 	local run = math.cos(math.rad(angle)) * speed
 	local rise = math.sin(math.rad(angle)) * speed
 
-	return Vector2.new(run, rise) * 5
+	return direction + Vector2.new(run, rise) * 5
 end
 
 local function createParticleObject(container: GuiObject, props: GooeyParticleProps): ImageLabel
@@ -39,9 +39,29 @@ local function createParticleObject(container: GuiObject, props: GooeyParticlePr
 	return particle
 end
 
+local function getVectorFromNormalId(normalId: Enum.NormalId): Vector2
+	if normalId == Enum.NormalId.Top then
+		return Vector2.yAxis
+	elseif normalId == Enum.NormalId.Bottom then
+		return -Vector2.yAxis
+	elseif normalId == Enum.NormalId.Right then
+		return Vector2.xAxis
+	elseif normalId == Enum.NormalId.Left then
+		return -Vector2.xAxis
+	else
+		return Vector2.zero
+	end
+end
+
 local function createParticle(emitter: Emitter | GooeyParticleEmitter)
 	local id = HttpService:GenerateGUID(false)
 	local lifetime = getParticleLifetime(emitter.props.Lifetime)
+
+	local position = Vector2.zero
+	local absoluteSize = emitter.container.AbsoluteSize
+	if absoluteSize.Magnitude > 0 then
+		position = Vector2.new(RNG:NextInteger(0, absoluteSize.X), RNG:NextInteger(0, absoluteSize.Y))
+	end
 
 	local particle = {
 		lifetime = lifetime,
@@ -51,8 +71,12 @@ local function createParticle(emitter: Emitter | GooeyParticleEmitter)
 		end,
 		rotation = RNG:NextNumber(emitter.props.Rotation.Min, emitter.props.Rotation.Max),
 		spawnedAt = os.clock(),
-		position = Vector2.new(0, 0),
-		velocity = getParticleVelocity(emitter.props.Spread, emitter.props.Speed)
+		position = position,
+		velocity = getParticleVelocity(
+			getVectorFromNormalId(emitter.props.EmissionDirection),
+			emitter.props.Spread,
+			emitter.props.Speed
+		),
 	}
 
 	emitter.particles[id] = particle
