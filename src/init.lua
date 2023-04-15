@@ -11,7 +11,7 @@ local GooeyParticles = {}
 local function createFrame(container: GuiObject, pos: UDim2)
 	local frame = Instance.new("Frame")
 	frame.AnchorPoint = Vector2.new(0, 0)
-	frame.BackgroundTransparency = 0.5
+	frame.BackgroundTransparency = 1
 	frame.Position = pos
 	frame.Size = UDim2.fromScale(1, 1)
 	frame.Parent = container
